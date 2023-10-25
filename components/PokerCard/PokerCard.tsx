@@ -6,6 +6,7 @@ export interface PokerCardProps {
   icon?: string;
   onClick?: VoidFunction;
   isSelected?: boolean;
+  size?: "small" | "regular";
 }
 
 const PokerCard: React.FC<PokerCardProps> = ({
@@ -13,17 +14,34 @@ const PokerCard: React.FC<PokerCardProps> = ({
   icon,
   onClick,
   isSelected,
+  size = "regular",
 }) => {
-  const cardStyle = isSelected
-    ? "border-2 border-blue-600 bg-blue-100 rounded-md p-4 m-2 flex justify-center items-center h-32 w-32 cursor-pointer"
-    : "border-2 border-gray-300 bg-white rounded-md p-4 m-2 flex justify-center items-center h-32 w-32 cursor-pointer";
+  const sizeStyles = {
+    regular: "h-40 w-32 text-6xl", // regular size styles
+    small: "h-16 w-12 text-2xl", // small size styles
+  };
+  const baseStyle =
+    "border-2 rounded-md p-4 m-2 flex justify-center items-center cursor-pointer";
+  const selectedStyle = "border-blue-600 bg-blue-100";
+  const unselectedStyle = "border-gray-300 bg-white";
+
+  const cardStyle = `${baseStyle} ${
+    isSelected ? selectedStyle : unselectedStyle
+  } ${sizeStyles[size]}`;
 
   return (
     <div className={cardStyle} onClick={onClick}>
       {icon ? (
-        <Image src={`/icons/${icon}.svg`} width={30} height={30} alt={icon} />
+        <Image
+          src={`/icons/${icon}.svg`}
+          width={size === "small" ? 15 : 30}
+          height={size === "small" ? 15 : 30}
+          alt={icon}
+        />
       ) : (
-        <span className="text-6xl font-bold">{value}</span>
+        <span className={`${size === "small" ? "font-medium" : "font-bold"}`}>
+          {value}
+        </span>
       )}
     </div>
   );

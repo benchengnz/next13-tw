@@ -21,3 +21,10 @@ body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-solid-rgb-rgb));
 }
+
+.card-back {
+  background-image: url('/icons/heart-regular.svg');
+  background-size: 70% 70%;
+  background-repeat: no-repeat;
+  background-position: center;
+}

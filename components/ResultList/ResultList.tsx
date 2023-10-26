@@ -32,7 +32,7 @@ const ResultList: React.FC = () => {
           isVisible={isVisible}
         />
       </div>
-      <ResultTable estimates={estimates} />
+      <ResultTable estimates={estimates} isvisible={isVisible} />
     </div>
   );
 };

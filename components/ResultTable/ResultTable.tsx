@@ -3,13 +3,14 @@ import React from "react";
 import PokerCard from "../PokerCard/PokerCard";
 
 type Props = {
+  isvisible: boolean;
   estimates: {
     name: string;
     score: string;
   }[];
 };
 
-const ResultTable: React.FC<Props> = ({ estimates }) => {
+const ResultTable: React.FC<Props> = ({ estimates, isvisible }) => {
   return (
     <table className="w-full border-collapse text-left">
       <thead>
@@ -22,7 +23,11 @@ const ResultTable: React.FC<Props> = ({ estimates }) => {
         {estimates.map((estimate, index) => (
           <tr key={index} className="hover:bg-gray-100 border  border-gray-300">
             <td className="py-1 px-4">{estimate.name}</td>
-            <PokerCard size="small" value={estimate.score} />
+            <PokerCard
+              size="small"
+              value={estimate.score.length > 2 ? "" : estimate.score}
+              icon={estimate.score.length > 2 ? estimate.score : ""}
+            />
           </tr>
         ))}
       </tbody>

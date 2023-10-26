@@ -29,8 +29,13 @@ const PokerCard: React.FC<PokerCardProps> = ({
     isSelected ? selectedStyle : unselectedStyle
   } ${sizeStyles[size]}`;
 
+  const isCardBack = !value && !icon;
+
   return (
-    <div className={cardStyle} onClick={onClick}>
+    <div
+      className={`${cardStyle} ${isCardBack ? "card-back" : ""}`}
+      onClick={onClick}
+    >
       {icon ? (
         <Image
           src={`/icons/${icon}.svg`}

@@ -6,7 +6,7 @@ type Props = {
   isvisible: boolean;
   estimates: {
     name: string;
-    score: string;
+    estimate: string;
   }[];
 };
 
@@ -26,8 +26,8 @@ const ResultTable: React.FC<Props> = ({ estimates, isvisible }) => {
             <PokerCard
               size="small"
               isVisible={isvisible}
-              value={estimate.score.length > 2 ? "" : estimate.score}
-              icon={estimate.score.length > 2 ? estimate.score : ""}
+              value={estimate.estimate.length > 3 ? "" : estimate.estimate}
+              icon={estimate.estimate.length > 3 ? estimate.estimate : ""}
             />
           </tr>
         ))}

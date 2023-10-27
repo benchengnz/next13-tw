@@ -12,9 +12,9 @@ type Story = StoryObj<typeof meta>;
 export const Result: Story = {
   args: {
     estimates: [
-      { name: "ben", score: "2" },
-      { name: "Edward", score: "3" },
-      { name: "Elsie", score: "3" },
+      { name: "ben", estimate: "2" },
+      { name: "Edward", estimate: "3" },
+      { name: "Elsie", estimate: "3" },
     ],
   },
 };

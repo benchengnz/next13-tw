@@ -6,10 +6,11 @@ const useEnsureUsername = () => {
   const { username } = useUsername();
   const [isModalOpen, setModalOpen] = useState<boolean>(!username);
 
+  console.log("rendering useEnsureUsername. ", username);
+
   if (isModalOpen) {
     return <UsernameModal onClose={() => setModalOpen(false)} />;
   }
-
   return null;
 };
 

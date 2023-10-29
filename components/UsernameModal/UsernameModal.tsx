@@ -16,7 +16,7 @@ const UsernameModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   return (
     <div className="modal flex items-center justify-center ">
       <form
-        className="border border-gray-300 shadow-md 
+        className="border border-gray-300 shadow-md mt-4
         rounded-lg p-6 w-80 bg-gray-100 space-y-2"
         onSubmit={handleSubmit}
       >

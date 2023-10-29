@@ -1,34 +1,25 @@
 import { Inter } from "next/font/google";
-import { useUsername } from "@/contexts/UsernameContext";
-import { useEffect, useState } from "react";
-import UsernameModal from "@/components/UsernameModal/UsernameModal";
-import router from "next/router";
 import useEnsureUsername from "@/hooks/useEnsureUsername";
+import useCreateRoom from "@/hooks/useCreateRoom";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const { username } = useUsername();
-  //const [isModalOpen, setModalOpen] = useState<boolean>(!username);
+  console.log("landing on home page");
   const usernamePrompt = useEnsureUsername();
-
-  useEffect(() => {
-    console.log(`username ${username}`);
-    if (username) {
-      router.push(`/rooms/-Nhk-cn2V49nbtVlCNJz`);
-    }
-  }, [username]);
+  const { creationStatus } = useCreateRoom();
   if (usernamePrompt) return usernamePrompt;
   return (
     <main
       className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
     >
       <div>
-        {/* {isModalOpen ? (
-          <UsernameModal onClose={() => setModalOpen(false)} />
-        ) : (
-          <div>Welcome, {username}</div>
-        )} */}
+        {creationStatus === "idle" && <p>Waiting to create room...</p>}
+        {creationStatus === "creating" && <p>Creating room...</p>}
+        {creationStatus === "done" && <p>Room created successfully!</p>}
+        {creationStatus === "error" && (
+          <p>Error creating room. Please try again.</p>
+        )}
       </div>
     </main>
   );

@@ -11,6 +11,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Result: Story = {
   args: {
+    isvisible: false,
     estimates: [
       { name: "ben", estimate: "2" },
       { name: "Edward", estimate: "3" },

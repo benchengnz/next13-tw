@@ -28,3 +28,22 @@ body {
   background-repeat: no-repeat;
   background-position: center;
 }
+
+/* Add this inside your global.css or in a <style jsx> inside your component */
+.popup-enter {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
+.popup-enter-active {
+  opacity: 1;
+}
+
+.popup-exit {
+  opacity: 1;
+}
+
+.popup-exit-active {
+  opacity: 0;
+  transition: opacity 2.5s ease-in;
+}

@@ -9,6 +9,10 @@ const Rooms: FC = () => {
   const { username } = useUsername();
   const usernamePrompt = useEnsureUsername();
 
+  if (!roomid) {
+    console.log("no roomid yet.");
+  } else console.log(`room id is ${roomid}`);
+
   if (usernamePrompt) return usernamePrompt;
 
   return (

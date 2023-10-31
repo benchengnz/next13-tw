@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import ResultList from "./ResultList";
+import ResultList, { ResultListProps } from "./ResultList";
 
 const meta = {
   title: "Components/ResultList",
@@ -9,4 +9,12 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {};
+export const Primary: Story = {
+  args: {
+    estimates: [
+      { name: "Ben", estimate: "2" },
+      { name: "Joe", estimate: "3" },
+    ],
+    isVisible: true,
+  },
+};

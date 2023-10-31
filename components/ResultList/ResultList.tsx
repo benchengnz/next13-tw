@@ -13,38 +13,50 @@ type Estimate = {
   estimate: string;
 };
 
-const ResultList: React.FC = () => {
-  const [estimates, setEstimates] = useState<Estimate[]>([]); // Add your initial data here
-  const [isVisible, setIsVisible] = useState(true);
+export type ResultListProps = {
+  estimates: Estimate[];
+  isVisible: boolean;
+  onClearEstimates: VoidFunction;
+  onToggleVisibility: VoidFunction;
+};
 
-  useEffect(() => {
-    const estimatesRef = ref(db, "rooms/-Nhk-cn2V49nbtVlCNJz/participants");
-    const unsubscribe = onValue(estimatesRef, (snapshot) => {
-      const data = snapshot.val();
-      const loadedEstimates: Estimate[] = [];
-      for (let key in data) {
-        loadedEstimates.push(data[key]);
-      }
-      setEstimates(loadedEstimates);
-    });
-    return () => unsubscribe();
-  }, []);
+const ResultList: React.FC<ResultListProps> = ({
+  estimates,
+  isVisible,
+  onClearEstimates,
+  onToggleVisibility,
+}) => {
+  // const [estimates, setEstimates] = useState<Estimate[]>([]); // Add your initial data here
+  // const [isVisible, setIsVisible] = useState(true);
 
-  const handleClearEstimates = () => {
-    // Logic to clear estimates
-    setEstimates([]);
-  };
+  // useEffect(() => {
+  //   const estimatesRef = ref(db, "rooms/-Nhk-cn2V49nbtVlCNJz/participants");
+  //   const unsubscribe = onValue(estimatesRef, (snapshot) => {
+  //     const data = snapshot.val();
+  //     const loadedEstimates: Estimate[] = [];
+  //     for (let key in data) {
+  //       loadedEstimates.push(data[key]);
+  //     }
+  //     setEstimates(loadedEstimates);
+  //   });
+  //   return () => unsubscribe();
+  // }, []);
 
-  const handleToggleVisibility = () => {
-    setIsVisible(!isVisible);
-  };
+  // const handleClearEstimates = () => {
+  //   // Logic to clear estimates
+  //   setEstimates([]);
+  // };
+
+  // const handleToggleVisibility = () => {
+  //   setIsVisible(!isVisible);
+  // };
 
   return (
     <div>
       <div className="flex justify-between items-center mb-4">
-        <ClearEstimateButton onClick={handleClearEstimates} />
+        <ClearEstimateButton onClick={onClearEstimates} />
         <ToggleVisibilityButton
-          onClick={handleToggleVisibility}
+          onClick={onToggleVisibility}
           isVisible={isVisible}
         />
       </div>

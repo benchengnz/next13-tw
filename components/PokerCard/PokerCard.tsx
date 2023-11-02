@@ -19,7 +19,7 @@ const PokerCard: React.FC<PokerCardProps> = ({
   isVisible = true,
 }) => {
   const sizeStyles = {
-    regular: "h-40 w-32 text-6xl",
+    regular: "h-36 w-28 text-5xl",
     small: "h-16 w-12 text-2xl",
   };
 

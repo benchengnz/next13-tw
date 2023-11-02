@@ -1,18 +1,23 @@
 import { useState } from "react";
 import PokerCard from "../PokerCard/PokerCard";
 
-type CardData = {
+export type CardData = {
   value?: string;
   icon?: string;
 };
 
-const CardDisplay = () => {
+export type CardDisplayProps = {
+  onSelect: (card: CardData) => void;
+};
+
+const CardDisplay: React.FC<CardDisplayProps> = ({ onSelect }) => {
   const [selectedCard, setSelectedCard] = useState<string | null | undefined>(
     null
   );
   const handleCardClick = (card: CardData) => {
     // Use both value and iconName to uniquely identify a card
     setSelectedCard(card.value ?? card.icon);
+    onSelect(card);
   };
   const isCardSelected = (card: CardData) => {
     return selectedCard === (card.value ?? card.icon);

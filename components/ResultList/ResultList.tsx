@@ -8,7 +8,7 @@ import { db } from "../../lib/firebase";
 import { ref, onValue, set } from "firebase/database";
 
 // Define your data type for the estimates
-type Estimate = {
+export type Estimate = {
   name: string;
   estimate: string;
 };

@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 import RoomHeader from "../RoomHeader/RoomHeader";
 import CardDisplay, { CardData } from "../CardDisplay/CardDisplay";
 import ResultList, { Estimate } from "../ResultList/ResultList";
-import { db } from "@/lib/firebase";
+import {
+  clearEstimates,
+  db,
+  toggleRoomVisibility,
+  updateParticipantEstimate,
+} from "@/lib/firebase";
 import { ref, onValue, set } from "firebase/database";
 
 type RoomContainerProps = {
@@ -42,24 +47,35 @@ const RoomContainer: React.FC<RoomContainerProps> = ({ roomId, userName }) => {
     return () => unsubscribe();
   }, [roomId]);
 
-  const handleCardSelect = (card: CardData) => {
+  const handleCardSelect = async (card: CardData) => {
     // Update the estimate for the user in Firebase
     // ...
-    console.log(card);
+    try {
+      await updateParticipantEstimate(roomId, userName, card);
+      // No need to update local state since Firebase's onValue will handle it
+    } catch (error) {
+      // Handle error (e.g., show an error message to the user)
+      console.error("Failed to update estimate: ", error);
+    }
   };
 
-  const handleClearEstimates = () => {
-    // Logic to clear estimates in Firebase
-    // ...
+  const handleClearEstimates = async () => {
+    try {
+      await clearEstimates(roomId);
+    } catch (error) {
+      console.error("Failed to clear estimates: ", error);
+    }
   };
 
-  const handleToggleVisibility = () => {
-    // Toggle the visibility of the estimates in Firebase
-    // ...
+  const handleToggleVisibility = async () => {
+    if (roomData) {
+      await toggleRoomVisibility(roomId, roomData.isVisible);
+    }
   };
 
   // If you need more handlers, define them here and pass them down as needed.
   if (!roomData) return <div>Loading room data...</div>;
+  console.log(roomData);
   return (
     <div>
       <RoomHeader roomName={roomData?.name} userName={userName} currentUrl="" />

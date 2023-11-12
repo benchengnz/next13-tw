@@ -19,6 +19,12 @@ export const NumberCard: Story = {
 
 export const IconCard: Story = {
   args: {
-    icon: "mug-hot-solid",
+    value: "mug-hot-solid",
+  },
+};
+
+export const NoValueCard: Story = {
+  args: {
+    value: "",
   },
 };

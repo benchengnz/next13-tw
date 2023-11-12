@@ -26,8 +26,7 @@ const ResultTable: React.FC<Props> = ({ estimates, isvisible }) => {
             <PokerCard
               size="small"
               isVisible={isvisible}
-              value={estimate.estimate.length > 3 ? "" : estimate.estimate}
-              icon={estimate.estimate.length > 3 ? estimate.estimate : ""}
+              value={estimate.estimate}
             />
           </tr>
         ))}

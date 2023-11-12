@@ -26,31 +26,6 @@ const ResultList: React.FC<ResultListProps> = ({
   onClearEstimates,
   onToggleVisibility,
 }) => {
-  // const [estimates, setEstimates] = useState<Estimate[]>([]); // Add your initial data here
-  // const [isVisible, setIsVisible] = useState(true);
-
-  // useEffect(() => {
-  //   const estimatesRef = ref(db, "rooms/-Nhk-cn2V49nbtVlCNJz/participants");
-  //   const unsubscribe = onValue(estimatesRef, (snapshot) => {
-  //     const data = snapshot.val();
-  //     const loadedEstimates: Estimate[] = [];
-  //     for (let key in data) {
-  //       loadedEstimates.push(data[key]);
-  //     }
-  //     setEstimates(loadedEstimates);
-  //   });
-  //   return () => unsubscribe();
-  // }, []);
-
-  // const handleClearEstimates = () => {
-  //   // Logic to clear estimates
-  //   setEstimates([]);
-  // };
-
-  // const handleToggleVisibility = () => {
-  //   setIsVisible(!isVisible);
-  // };
-
   return (
     <div>
       <div className="flex justify-between items-center mb-4">

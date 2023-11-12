@@ -1,3 +1,4 @@
+import RoomContainer from "@/components/RoomContainer/RoomContainer";
 import { useUsername } from "@/contexts/UsernameContext";
 import useEnsureUsername from "@/hooks/useEnsureUsername";
 import { useRouter } from "next/router";
@@ -6,6 +7,7 @@ import { FC } from "react";
 const Rooms: FC = () => {
   const router = useRouter();
   const { roomid } = router.query;
+  const roomIdValue = Array.isArray(roomid) ? roomid[0] : roomid;
   const { username } = useUsername();
   const usernamePrompt = useEnsureUsername();
 
@@ -22,7 +24,10 @@ const Rooms: FC = () => {
           <div>Loading...</div>
         ) : (
           <div>
-            Welcome, {username} roomid {roomid}
+            <RoomContainer
+              roomId={roomIdValue as string}
+              userName={username as string}
+            />
           </div>
         )}
       </div>

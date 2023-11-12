@@ -2,8 +2,7 @@ import Image from "next/image";
 import React from "react";
 
 export interface PokerCardProps {
-  value?: string;
-  icon?: string;
+  value: string;
   onClick?: VoidFunction;
   isSelected?: boolean;
   size?: "small" | "regular";
@@ -11,8 +10,7 @@ export interface PokerCardProps {
 }
 
 const PokerCard: React.FC<PokerCardProps> = ({
-  value,
-  icon,
+  value = "",
   onClick,
   isSelected,
   size = "regular",
@@ -32,26 +30,28 @@ const PokerCard: React.FC<PokerCardProps> = ({
     invisible: "card-back",
   };
 
+  const isIcon = (value?.length ?? 0) > 3;
+  const effectiveVisibility = isVisible || !value;
   const cardStyle = [
     styles.base,
     isSelected ? styles.selected : styles.unselected,
     sizeStyles[size],
-    !isVisible && styles.invisible,
+    !effectiveVisibility && styles.invisible,
   ].join(" ");
 
   return (
     <div className={cardStyle} onClick={onClick}>
-      {isVisible &&
-        (icon ? (
+      {effectiveVisibility &&
+        (isIcon ? (
           <Image
-            src={`/icons/${icon}.svg`}
+            src={`/icons/${value}.svg`}
             width={size === "small" ? 15 : 30}
             height={size === "small" ? 15 : 30}
-            alt={icon}
+            alt={value}
           />
         ) : (
           <span className={`${size === "small" ? "font-medium" : "font-bold"}`}>
-            {value}
+            {value ? value : "-"}
           </span>
         ))}
     </div>

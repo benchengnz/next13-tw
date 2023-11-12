@@ -2,8 +2,7 @@ import { useState } from "react";
 import PokerCard from "../PokerCard/PokerCard";
 
 export type CardData = {
-  value?: string;
-  icon?: string;
+  value: string;
 };
 
 export type CardDisplayProps = {
@@ -16,15 +15,15 @@ const CardDisplay: React.FC<CardDisplayProps> = ({ onSelect }) => {
   );
   const handleCardClick = (card: CardData) => {
     // Use both value and iconName to uniquely identify a card
-    setSelectedCard(card.value ?? card.icon);
+    setSelectedCard(card.value);
     onSelect(card);
   };
   const isCardSelected = (card: CardData) => {
-    return selectedCard === (card.value ?? card.icon);
+    return selectedCard === card.value;
   };
   const cards: CardData[] = [
     { value: "?" },
-    { icon: "mug-hot-solid" },
+    { value: "mug-hot-solid" },
     { value: "1/2" },
     { value: "1" },
     { value: "2" },
@@ -45,7 +44,6 @@ const CardDisplay: React.FC<CardDisplayProps> = ({ onSelect }) => {
             key={index}
             isSelected={isCardSelected(card)}
             value={card.value}
-            icon={card.icon}
             onClick={() => handleCardClick(card)}
           />
         );

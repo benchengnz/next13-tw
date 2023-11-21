@@ -24,6 +24,38 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+## Environment Setup
+
+To run this project locally, you'll need to set up your environment variables. Create a file named `.env.local` in the root of the project with the following content:
+
+```env
+NEXT_PUBLIC_FIREBASE_API_KEY="your-firebase-api-key"
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN="your-firebase-auth-domain"
+NEXT_PUBLIC_FIREBASE_DATABASE_URL="your-firebase-database-url"
+NEXT_PUBLIC_FIREBASE_PROJECT_ID="your-firebase-project-id"
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET="your-firebase-storage-bucket"
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID="your-firebase-messaging-sender-id"
+NEXT_PUBLIC_FIREBASE_APP_ID="your-firebase-app-id"
+FIREBASE_EMAIL="your-firebase-email-for-server-authentication"
+FIREBASE_PASSWORD="your-firebase-password-for-server-authentication"
+```
+
+Replace the placeholders with your actual Firebase configuration values and credentials. This information can be found in your Firebase project settings.
+
+Firebase Configuration Variables
+NEXT_PUBLIC_FIREBASE_API_KEY: Your Firebase API key.
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: Your Firebase Auth domain.
+NEXT_PUBLIC_FIREBASE_DATABASE_URL: Your Firebase Database URL.
+NEXT_PUBLIC_FIREBASE_PROJECT_ID: Your Firebase project ID.
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: Your Firebase storage bucket.
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: Your Firebase messaging sender ID.
+NEXT_PUBLIC_FIREBASE_APP_ID: Your Firebase app ID.
+
+Server Authentication Variables
+FIREBASE_EMAIL: Email for server-side Firebase authentication (used for restricted operations).
+FIREBASE_PASSWORD: Password for server-side Firebase authentication.
+Note: Do not expose your real Firebase credentials or private keys in public repositories or documentation.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

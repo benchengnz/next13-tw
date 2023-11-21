@@ -9,43 +9,34 @@ import {
   updateParticipantEstimate,
 } from "@/lib/firebase";
 import { ref, onValue, set } from "firebase/database";
+import { RoomData } from "@/types/types";
+import useGetRoomData from "@/hooks/useGetRoomData";
 
 type RoomContainerProps = {
   roomId: string; // The ID of the room, could be from the URL or user input
   userName: string; // The name of the user in the room
 };
 
-type Participant = {
-  estimate: string;
-  name: string;
-};
-
-type RoomData = {
-  isVisible: boolean;
-  name: string;
-  owner: string;
-  participants: { [key: string]: Participant };
-};
-
 const RoomContainer: React.FC<RoomContainerProps> = ({ roomId, userName }) => {
-  const [roomData, setRoomData] = useState<RoomData | null>(null); // Replace 'any' with your room data type
+  // const [roomData, setRoomData] = useState<RoomData | null>(null); // Replace 'any' with your room data type
 
+  const [roomData, error] = useGetRoomData(roomId);
   const participantsArray = roomData
     ? Object.values(roomData.participants)
     : [];
 
-  // Fetch room data and listen for changes
-  useEffect(() => {
-    const roomRef = ref(db, `rooms/${roomId}`);
-    const unsubscribe = onValue(roomRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        setRoomData(data);
-      }
-    });
+  // // Fetch room data and listen for changes
+  // useEffect(() => {
+  //   const roomRef = ref(db, `rooms/${roomId}`);
+  //   const unsubscribe = onValue(roomRef, (snapshot) => {
+  //     const data = snapshot.val();
+  //     if (data) {
+  //       setRoomData(data);
+  //     }
+  //   });
 
-    return () => unsubscribe();
-  }, [roomId]);
+  //   return () => unsubscribe();
+  // }, [roomId]);
 
   const handleCardSelect = async (card: CardData) => {
     // Update the estimate for the user in Firebase

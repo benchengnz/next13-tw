@@ -1,25 +1,18 @@
 import { useEffect, useState } from "react";
 import { getDatabase, ref, onValue } from "firebase/database";
-
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { FirebaseError } from "firebase/app";
+import { getAuth, signInAnonymously } from "firebase/auth";
 import { RoomData } from "@/types/types";
 
-const useFirebaseRoomData = (roomId: string) => {
+const useGetRoomData = (
+  roomId: string
+): [RoomData | null, FirebaseError | null] => {
   const [roomData, setRoomData] = useState<RoomData | null>(null);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<FirebaseError | null>(null);
 
   useEffect(() => {
-    const firebaseEmail = process.env.FIREBASE_EMAIL;
-    const firebasePassword = process.env.FIREBASE_PASSWORD;
-    if (!firebaseEmail || !firebasePassword) {
-      console.error(
-        "Firebase credentials are not set in environment variables"
-      );
-      return;
-    }
-    // Authenticate
     const auth = getAuth();
-    signInWithEmailAndPassword(auth, firebaseEmail, firebasePassword)
+    signInAnonymously(auth)
       .then(() => {
         // Authenticated, now fetch room data
         const db = getDatabase();
@@ -29,8 +22,8 @@ const useFirebaseRoomData = (roomId: string) => {
           setRoomData(data);
         });
       })
-      .catch((error) => {
-        console.error("Authentication failed:", error);
+      .catch((error: FirebaseError) => {
+        console.error("Authentication failed:", error.message);
         setError(error);
       });
   }, [roomId]);
@@ -38,4 +31,4 @@ const useFirebaseRoomData = (roomId: string) => {
   return [roomData, error];
 };
 
-export default useFirebaseRoomData;
+export default useGetRoomData;

@@ -38,22 +38,27 @@ NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID="your-firebase-messaging-sender-id"
 NEXT_PUBLIC_FIREBASE_APP_ID="your-firebase-app-id"
 FIREBASE_EMAIL="your-firebase-email-for-server-authentication"
 FIREBASE_PASSWORD="your-firebase-password-for-server-authentication"
+FIREBASE_PRIVATE_KEY="your-firebase-admin-sdk-private-key"
 ```
 
 Replace the placeholders with your actual Firebase configuration values and credentials. This information can be found in your Firebase project settings.
 
 Firebase Configuration Variables
-NEXT_PUBLIC_FIREBASE_API_KEY: Your Firebase API key.
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: Your Firebase Auth domain.
-NEXT_PUBLIC_FIREBASE_DATABASE_URL: Your Firebase Database URL.
-NEXT_PUBLIC_FIREBASE_PROJECT_ID: Your Firebase project ID.
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: Your Firebase storage bucket.
-NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: Your Firebase messaging sender ID.
-NEXT_PUBLIC_FIREBASE_APP_ID: Your Firebase app ID.
+
+- NEXT_PUBLIC_FIREBASE_API_KEY: Your Firebase API key.
+- NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: Your Firebase Auth domain.
+- NEXT_PUBLIC_FIREBASE_DATABASE_URL: Your Firebase Database URL.
+- NEXT_PUBLIC_FIREBASE_PROJECT_ID: Your Firebase project ID.
+- NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: Your Firebase storage bucket.
+- NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: Your Firebase messaging sender ID.
+- NEXT_PUBLIC_FIREBASE_APP_ID: Your Firebase app ID.
 
 Server Authentication Variables
-FIREBASE_EMAIL: Email for server-side Firebase authentication (used for restricted operations).
-FIREBASE_PASSWORD: Password for server-side Firebase authentication.
+
+- FIREBASE_EMAIL: Email for server-side Firebase authentication (used for restricted operations).
+- FIREBASE_PASSWORD: Password for server-side Firebase authentication.
+- FIREBASE_PRIVATE_KEY: Your Firebase Admin SDK private key. Ensure this key is kept secure and is not exposed in public repositories. Replace newline characters in the private key with \n.
+
 Note: Do not expose your real Firebase credentials or private keys in public repositories or documentation.
 
 ## Learn More

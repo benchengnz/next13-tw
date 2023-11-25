@@ -18,25 +18,10 @@ type RoomContainerProps = {
 };
 
 const RoomContainer: React.FC<RoomContainerProps> = ({ roomId, userName }) => {
-  // const [roomData, setRoomData] = useState<RoomData | null>(null); // Replace 'any' with your room data type
-
   const [roomData, error] = useGetRoomData(roomId);
   const participantsArray = roomData
-    ? Object.values(roomData.participants)
+    ? Object.values(roomData.participants || {})
     : [];
-
-  // // Fetch room data and listen for changes
-  // useEffect(() => {
-  //   const roomRef = ref(db, `rooms/${roomId}`);
-  //   const unsubscribe = onValue(roomRef, (snapshot) => {
-  //     const data = snapshot.val();
-  //     if (data) {
-  //       setRoomData(data);
-  //     }
-  //   });
-
-  //   return () => unsubscribe();
-  // }, [roomId]);
 
   const handleCardSelect = async (card: CardData) => {
     // Update the estimate for the user in Firebase
@@ -64,7 +49,8 @@ const RoomContainer: React.FC<RoomContainerProps> = ({ roomId, userName }) => {
     }
   };
 
-  // If you need more handlers, define them here and pass them down as needed.
+  if (error) return <div>Error loading room data..</div>;
+
   if (!roomData) return <div>Loading room data...</div>;
   console.log(roomData);
   return (

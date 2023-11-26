@@ -47,7 +47,6 @@ const updateParticipantEstimate = async (
       estimate: estimateValue,
       name: userName,
     });
-    console.log(`Estimate updated to ${estimateValue} for user ${userName}`);
   } catch (error) {
     console.error("Error updating participant estimate: ", error);
     throw error; // Re-throw the error so you can handle it in the component
@@ -70,7 +69,6 @@ const clearEstimates = async (roomId: string): Promise<void> => {
       });
 
       await update(participantsRef, updates);
-      console.log(`Estimates cleared for room ${roomId}`);
     }
   } catch (error) {
     console.error("Error clearing estimates: ", error);

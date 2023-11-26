@@ -19,7 +19,7 @@ const Rooms: FC = () => {
 
   return (
     <main>
-      <div>
+      <div className="max-w-3xl mx-auto">
         {!roomid ? (
           <div>Loading...</div>
         ) : (

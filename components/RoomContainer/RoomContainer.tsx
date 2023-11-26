@@ -11,6 +11,7 @@ import {
 import { ref, onValue, set } from "firebase/database";
 import { RoomData } from "@/types/types";
 import useGetRoomData from "@/hooks/useGetRoomData";
+import Spinner from "../Spinner/Spinner";
 
 type RoomContainerProps = {
   roomId: string; // The ID of the room, could be from the URL or user input
@@ -51,8 +52,7 @@ const RoomContainer: React.FC<RoomContainerProps> = ({ roomId, userName }) => {
 
   if (error) return <div>Error loading room data..</div>;
 
-  if (!roomData) return <div>Loading room data...</div>;
-  console.log(roomData);
+  if (!roomData) return <Spinner size={100} caption="loading..." />;
   return (
     <div>
       <RoomHeader roomName={roomData?.name} userName={userName} currentUrl="" />

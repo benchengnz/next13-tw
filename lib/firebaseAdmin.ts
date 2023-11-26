@@ -21,7 +21,6 @@ validateFirebaseEnvVariables();
 
 const firebaseAdmin = () => {
   if (!admin.apps.length) {
-    console.log(process.env.FIREBASE_PRIVATE_KEY);
     admin.initializeApp({
       credential: admin.credential.cert({
         projectId: process.env.FIREBASE_PROJECT_ID,

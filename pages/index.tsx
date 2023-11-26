@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import useEnsureUsername from "@/hooks/useEnsureUsername";
 import useCreateRoom from "@/hooks/useCreateRoom";
+import Spinner from "@/components/Spinner/Spinner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,8 +16,10 @@ export default function Home() {
     >
       <div>
         {creationStatus === "idle" && <p>Waiting to create room...</p>}
-        {creationStatus === "creating" && <p>Creating room...</p>}
-        {creationStatus === "done" && <p>Room created successfully!</p>}
+        {creationStatus === "creating" && (
+          <Spinner size={100} caption="loading..." />
+        )}
+        {/* {creationStatus === "done" && <p>Room created successfully!</p>} */}
         {creationStatus === "error" && (
           <p>Error creating room. Please try again.</p>
         )}

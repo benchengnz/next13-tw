@@ -1,4 +1,5 @@
 import RoomContainer from "@/components/RoomContainer/RoomContainer";
+import Spinner from "@/components/Spinner/Spinner";
 import { useUsername } from "@/contexts/UsernameContext";
 import useEnsureUsername from "@/hooks/useEnsureUsername";
 import { useRouter } from "next/router";
@@ -19,16 +20,16 @@ const Rooms: FC = () => {
 
   return (
     <main>
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl mx-auto mt-2">
         {!roomid ? (
-          <div>Loading...</div>
+          <Spinner caption="Loading" />
         ) : (
-          <div>
+          <>
             <RoomContainer
               roomId={roomIdValue as string}
               userName={username as string}
             />
-          </div>
+          </>
         )}
       </div>
     </main>

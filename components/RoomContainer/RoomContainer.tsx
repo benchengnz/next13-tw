@@ -25,13 +25,14 @@ const RoomContainer: React.FC<RoomContainerProps> = ({ roomId, userName }) => {
     : [];
 
   const handleCardSelect = async (card: CardData) => {
-    // Update the estimate for the user in Firebase
-    // ...
     try {
-      await updateParticipantEstimate(roomId, userName, card);
-      // No need to update local state since Firebase's onValue will handle it
+      await updateEstimate({
+        roomId: roomId,
+        userName: userName,
+        cardValue: card.value,
+      });
+      // Handle success if necessary
     } catch (error) {
-      // Handle error (e.g., show an error message to the user)
       console.error("Failed to update estimate: ", error);
     }
   };
@@ -46,15 +47,21 @@ const RoomContainer: React.FC<RoomContainerProps> = ({ roomId, userName }) => {
 
   const handleToggleVisibility = async () => {
     if (roomData) {
-      await toggleRoomVisibility(roomId, roomData.isVisible);
+      try {
+        await toggleRoomVisibilityAPI({
+          roomId,
+          currentVisibility: roomData.isVisible,
+        });
+      } catch (err) {
+        console.error(err);
+      }
     }
   };
-
   if (error) return <div>Error loading room data..</div>;
 
   if (!roomData) return <Spinner size={100} caption="loading..." />;
   return (
-    <div>
+    <>
       <RoomHeader roomName={roomData?.name} userName={userName} currentUrl="" />
       <CardDisplay onSelect={handleCardSelect} />
       <ResultList
@@ -63,8 +70,66 @@ const RoomContainer: React.FC<RoomContainerProps> = ({ roomId, userName }) => {
         onToggleVisibility={handleToggleVisibility}
         isVisible={roomData?.isVisible}
       />
-    </div>
+    </>
   );
+};
+
+type UpdateEstimateProps = {
+  roomId: string;
+  userName: string;
+  cardValue: string;
+};
+
+const updateEstimate = async ({
+  roomId,
+  userName,
+  cardValue,
+}: UpdateEstimateProps) => {
+  const response = await fetch("/api/updateEstimate", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      roomId: roomId,
+      userName: userName,
+      estimateValue: cardValue,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to update estimate");
+  }
+
+  // Optionally handle and return the response data
+  return response.json();
+};
+
+type toggleRoomVisibilityAPIProps = {
+  roomId: string;
+  currentVisibility: boolean;
+};
+const toggleRoomVisibilityAPI = async ({
+  roomId,
+  currentVisibility,
+}: toggleRoomVisibilityAPIProps) => {
+  const response = await fetch("/api/toggleRoomVisibility", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      roomId,
+      currentVisibility,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to toggle room visibility");
+  }
+
+  const result = await response.json();
+  return result;
 };
 
 export default RoomContainer;

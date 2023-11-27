@@ -18,6 +18,7 @@ export default async function handler(
       `rooms/${roomId}/participants/${userName.toLowerCase()}`
     );
 
+    console.log("eastimate: ", estimateValue);
     await participantRef.update({
       estimate: estimateValue,
       name: userName,

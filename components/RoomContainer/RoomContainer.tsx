@@ -1,15 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import "@/lib/firebase";
 import RoomHeader from "../RoomHeader/RoomHeader";
+
 import CardDisplay, { CardData } from "../CardDisplay/CardDisplay";
-import ResultList, { Estimate } from "../ResultList/ResultList";
-import {
-  clearEstimates,
-  db,
-  toggleRoomVisibility,
-  updateParticipantEstimate,
-} from "@/lib/firebase";
-import { ref, onValue, set } from "firebase/database";
-import { RoomData } from "@/types/types";
+import ResultList from "../ResultList/ResultList";
 import useGetRoomData from "@/hooks/useGetRoomData";
 import Spinner from "../Spinner/Spinner";
 
@@ -31,24 +25,19 @@ const RoomContainer: React.FC<RoomContainerProps> = ({ roomId, userName }) => {
         userName: userName,
         cardValue: card.value,
       });
-      // Handle success if necessary
     } catch (error) {
       console.error("Failed to update estimate: ", error);
     }
   };
 
   const handleClearEstimates = async () => {
-    try {
-      await clearEstimates(roomId);
-    } catch (error) {
-      console.error("Failed to clear estimates: ", error);
-    }
+    await clearEstimates({ roomId });
   };
 
   const handleToggleVisibility = async () => {
     if (roomData) {
       try {
-        await toggleRoomVisibilityAPI({
+        await toggleRoomVisibility({
           roomId,
           currentVisibility: roomData.isVisible,
         });
@@ -105,14 +94,38 @@ const updateEstimate = async ({
   return response.json();
 };
 
-type toggleRoomVisibilityAPIProps = {
+type clearEstimatesProps = {
+  roomId: string;
+};
+
+const clearEstimates = async ({ roomId }: clearEstimatesProps) => {
+  try {
+    const response = await fetch("/api/clearEstimates", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        roomId,
+      }),
+    });
+
+    if (!response.ok) {
+      console.error("Failed to clear estimates");
+    }
+  } catch (error) {
+    console.error("Failed to clear estimates: ", error);
+  }
+};
+
+type toggleRoomVisibilityProps = {
   roomId: string;
   currentVisibility: boolean;
 };
-const toggleRoomVisibilityAPI = async ({
+const toggleRoomVisibility = async ({
   roomId,
   currentVisibility,
-}: toggleRoomVisibilityAPIProps) => {
+}: toggleRoomVisibilityProps) => {
   const response = await fetch("/api/toggleRoomVisibility", {
     method: "POST",
     headers: {

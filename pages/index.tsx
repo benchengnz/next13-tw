@@ -6,7 +6,6 @@ import Spinner from "@/components/Spinner/Spinner";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  console.log("landing on home page");
   const usernamePrompt = useEnsureUsername();
   const { creationStatus } = useCreateRoom();
   if (usernamePrompt) return usernamePrompt;

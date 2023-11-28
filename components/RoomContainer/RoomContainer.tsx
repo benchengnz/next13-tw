@@ -18,6 +18,8 @@ const RoomContainer: React.FC<RoomContainerProps> = ({ roomId, userName }) => {
     ? Object.values(roomData.participants || {})
     : [];
 
+  const currentUrl = typeof window !== "undefined" ? window.location.href : "";
+
   const handleCardSelect = async (card: CardData) => {
     try {
       await updateEstimate({
@@ -51,7 +53,11 @@ const RoomContainer: React.FC<RoomContainerProps> = ({ roomId, userName }) => {
   if (!roomData) return <Spinner size={100} caption="loading..." />;
   return (
     <>
-      <RoomHeader roomName={roomData?.name} userName={userName} currentUrl="" />
+      <RoomHeader
+        roomName={roomData?.name}
+        userName={userName}
+        currentUrl={currentUrl}
+      />
       <CardDisplay onSelect={handleCardSelect} />
       <ResultList
         estimates={participantsArray}

@@ -1,6 +1,7 @@
 // components/RoomHeader.tsx
 import React, { useState } from "react";
 import { copyToClipboard } from "@/lib/clipboard";
+import Image from "next/image";
 
 type RoomHeaderProps = {
   roomName: string;
@@ -32,9 +33,14 @@ const RoomHeader: React.FC<RoomHeaderProps> = ({
         <h1 className="text-2xl font-semibold">{roomName}</h1>
         <button
           onClick={handleCopyClick}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className=" text-white font-bold py-2 px-4 rounded"
         >
-          Copy Url
+          <Image
+            src={`/icons/share-from-square-solid.svg`}
+            width={27}
+            height={24}
+            alt={"share"}
+          />
         </button>
         {isCopied && (
           <div

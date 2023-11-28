@@ -4,9 +4,6 @@ import ClearEstimateButton from "../ClearEstimateButton/ClearEstimateButton";
 import ToggleVisibilityButton from "../ToggleVisibilityButton/ToggleVisibilityButton";
 import ResultTable from "../ResultTable/ResultTable";
 
-import { db } from "../../lib/firebase";
-import { ref, onValue, set } from "firebase/database";
-
 // Define your data type for the estimates
 export type Estimate = {
   name: string;

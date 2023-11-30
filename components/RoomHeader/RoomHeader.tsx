@@ -28,17 +28,17 @@ const RoomHeader: React.FC<RoomHeaderProps> = ({
   };
 
   return (
-    <div className="bg-white shadow-md p-4 flex items-center justify-between">
-      <div className="flex items-center  space-x-4">
-        <h1 className="text-2xl font-semibold">{roomName}</h1>
+    <div className="shadow-md p-1 flex items-center justify-between">
+      <div className="flex items-center space-x-2">
+        <h4 className="text-1xl font-semibold">{roomName}</h4>
         <button
           onClick={handleCopyClick}
-          className=" text-white font-bold py-2 px-4 rounded"
+          className="text-white font-bold py-2 px-2 rounded"
         >
           <Image
             src={`/icons/share-from-square-solid.svg`}
-            width={27}
-            height={24}
+            width={16}
+            height={14}
             alt={"share"}
           />
         </button>
@@ -52,7 +52,7 @@ const RoomHeader: React.FC<RoomHeaderProps> = ({
           </div>
         )}
       </div>
-      <span className="text-2xl text-gray-500">Welcome, {userName}</span>
+      <span className="text-1xl text-gray-500">Welcome, {userName}</span>
     </div>
   );
 };

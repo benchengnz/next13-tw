@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "@/lib/firebase";
 import RoomHeader from "../RoomHeader/RoomHeader";
 
@@ -19,6 +19,32 @@ const RoomContainer: React.FC<RoomContainerProps> = ({ roomId, userName }) => {
     : [];
 
   const currentUrl = typeof window !== "undefined" ? window.location.href : "";
+
+  useEffect(() => {
+    const removeParticipant = () => {
+      // Fire-and-forget fetch request
+      fetch("/api/removeParticipant", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ roomId, userName }),
+      }).catch((error) => console.error("Error removing participant:", error));
+    };
+
+    const handleBeforeUnload = () => {
+      // Synchronous logic here (async not reliable)
+      removeParticipant(); // Fire-and-forget
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    // Cleanup function for when the component unmounts
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      removeParticipant(); // Fire-and-forget
+    };
+  }, [roomId, userName]);
 
   const handleCardSelect = async (card: CardData) => {
     try {

@@ -18,15 +18,21 @@ export default async function handler(
       `rooms/${roomId}/participants/${userName.toLowerCase()}`
     );
 
-    console.log("eastimate: ", estimateValue);
-    await participantRef.update({
-      estimate: estimateValue,
-      name: userName,
-    });
+    const snapshot = await participantRef.once("value");
+    if (snapshot.exists()) {
+      // Participant exists, update estimate
+      await participantRef.update({ estimate: estimateValue });
+    } else {
+      // Participant does not exist, add them
+      await participantRef.set({
+        name: userName,
+        estimate: estimateValue || "",
+      });
+    }
 
-    res.status(200).json({ message: "Estimate updated successfully" });
+    res.status(200).json({ message: "Participant updated successfully" });
   } catch (error) {
-    console.error("Error updating participant estimate: ", error);
-    res.status(500).json({ error: "Error updating estimate" });
+    console.error("Error updating participant: ", error);
+    res.status(500).json({ error: "Error updating participant" });
   }
 }

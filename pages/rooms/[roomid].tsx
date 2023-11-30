@@ -29,8 +29,8 @@ const Rooms: FC = () => {
         const response = await fetch(
           `/api/checkRoomExists?roomId=${roomIdValue}`
         );
+        setState("loaded");
         if (!response.ok) {
-          setState("loaded");
           console.log("Room doesn't exist. ", roomIdValue);
           setToastMessage("Room doesn't exist.");
           setTimeout(() => router.push("/"), 2000);
@@ -68,7 +68,7 @@ const Rooms: FC = () => {
           onClose={() => setToastMessage("")}
         />
       )}
-      {state === "loaded" && (
+      {state === "loaded" && !toastMessage && (
         <div className="max-w-3xl mx-auto mt-2">
           <RoomContainer
             roomId={roomIdValue as string}

@@ -28,7 +28,7 @@ const RoomHeader: React.FC<RoomHeaderProps> = ({
   };
 
   return (
-    <div className="shadow-md p-1 flex items-center justify-between">
+    <div className="bg-slate-100/70 shadow-md p-1 flex items-center justify-between">
       <div className="flex items-center space-x-2">
         <h4 className="text-1xl font-semibold">{roomName}</h4>
         <button

@@ -21,7 +21,10 @@ const ResultTable: React.FC<Props> = ({ estimates, isvisible }) => {
       </thead>
       <tbody>
         {estimates.map((estimate, index) => (
-          <tr key={index} className="hover:bg-gray-100 border  border-gray-300">
+          <tr
+            key={index}
+            className="hover:bg-gray-100 border bg-slate-100/70 border-gray-300"
+          >
             <td className="py-1 px-4">{estimate.name}</td>
             <td>
               <PokerCard

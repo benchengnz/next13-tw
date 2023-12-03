@@ -19,11 +19,9 @@ const UsernameModal: React.FC<UsernameModalProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("handleSubmit..");
     setUsername(tempName);
     if (imagePaths) {
       setAvatar(imagePaths[imageIndex]);
-      console.log(imagePaths[imageIndex]);
     }
 
     onClose();
@@ -38,7 +36,6 @@ const UsernameModal: React.FC<UsernameModalProps> = ({
     ];
 
   const onImageChangeHandler = (currentIndex: number) => {
-    console.log(currentIndex);
     if (imagePaths) {
       setImageIndex(currentIndex);
     }

@@ -12,6 +12,7 @@ export default async function handler(
   const { roomId } = req.body;
   try {
     const db = firebaseAdmin().database();
+    const roomRef = db.ref(`rooms/${roomId}`);
     const participantsRef = db.ref(`rooms/${roomId}/participants`);
 
     const snapshot = await participantsRef.once("value");
@@ -21,8 +22,11 @@ export default async function handler(
         participants[userName].estimate = ""; // Clear the estimate
       });
 
-      // Update the participants with cleared estimates
-      await participantsRef.update(participants);
+      await roomRef.update({
+        participants: participants,
+        isVisible: false,
+      });
+      res.status(200).json({ message: "Estimates cleared successfully" });
     }
   } catch (error) {
     console.error("Error clearing estimate: ", error);

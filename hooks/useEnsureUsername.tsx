@@ -5,7 +5,6 @@ import { useState } from "react";
 const useEnsureUsername = ({ imagePaths }: { imagePaths: string[] | null }) => {
   const { username } = useUsername();
   const [isModalOpen, setModalOpen] = useState<boolean>(!username);
-  console.log("isModalOpen: ", isModalOpen);
   if (isModalOpen) {
     return (
       <UsernameModal

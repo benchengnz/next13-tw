@@ -23,7 +23,6 @@ const Rooms = ({ imagePaths }: { imagePaths: string[] | null }) => {
     if (!router.isReady) return;
     const checkRoomExists = async () => {
       if (!roomIdValue) {
-        console.log("!roomIdValue");
         return;
       }
 
@@ -38,7 +37,6 @@ const Rooms = ({ imagePaths }: { imagePaths: string[] | null }) => {
           setTimeout(() => router.push("/"), 2000);
         } else {
           setState("loaded");
-          console.log(`roomid is: ${roomIdValue}`);
           if (username) {
             addParticipant(roomIdValue, username);
           }
@@ -101,7 +99,6 @@ const addParticipant = async (roomId: string, userName: string) => {
 
     // Handle successful addition of participant
     const data = await response.json();
-    console.log("Participant added successfully:", data.message);
   } catch (error) {
     console.error("Error adding participant:", error);
     // Handle error scenario

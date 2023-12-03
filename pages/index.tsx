@@ -10,7 +10,6 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home({ imagePaths }: { imagePaths: string[] | null }) {
   const usernamePrompt = useEnsureUsername({ imagePaths });
   const { creationStatus } = useCreateRoom();
-  console.log(imagePaths);
   if (usernamePrompt) return usernamePrompt;
   return (
     <main

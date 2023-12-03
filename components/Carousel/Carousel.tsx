@@ -27,7 +27,6 @@ const Carousel: React.FC<CarouselProps> = ({ children, onImageChange }) => {
     });
   };
 
-  console.log("rendering Carousel component");
   return (
     <div className="relative inline-block">
       <div className="flex items-center justify-center w-auto">

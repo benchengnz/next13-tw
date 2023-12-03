@@ -14,7 +14,7 @@ const Rooms = ({ imagePaths }: { imagePaths: string[] | null }) => {
   const router = useRouter();
   const { roomid } = router.query;
   const roomIdValue = Array.isArray(roomid) ? roomid[0] : roomid;
-  const { username } = useUsername();
+  const { username, avatar } = useUsername();
   const usernamePrompt = useEnsureUsername({ imagePaths });
   const [state, setState] = useState<RoomPageState>("loading");
   const [toastMessage, setToastMessage] = useState("");
@@ -40,8 +40,6 @@ const Rooms = ({ imagePaths }: { imagePaths: string[] | null }) => {
           setState("loaded");
           console.log(`roomid is: ${roomIdValue}`);
           if (username) {
-            console.log("username to be added: ", username);
-
             addParticipant(roomIdValue, username);
           }
         }

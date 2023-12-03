@@ -13,13 +13,19 @@ const UsernameModal: React.FC<UsernameModalProps> = ({
   onClose,
   imagePaths,
 }) => {
-  const { setUsername } = useUsername();
+  const { setUsername, setAvatar } = useUsername();
   const [tempName, setTempName] = useState("");
+  const [imageIndex, setImageIndex] = useState(0);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("handleSubmit..");
     setUsername(tempName);
+    if (imagePaths) {
+      setAvatar(imagePaths[imageIndex]);
+      console.log(imagePaths[imageIndex]);
+    }
+
     onClose();
   };
 
@@ -34,10 +40,9 @@ const UsernameModal: React.FC<UsernameModalProps> = ({
   const onImageChangeHandler = (currentIndex: number) => {
     console.log(currentIndex);
     if (imagePaths) {
-      console.log(imagePaths[currentIndex]);
+      setImageIndex(currentIndex);
     }
   };
-  console.log(imagePaths[0]);
   return (
     <div className="modal flex items-center justify-center ">
       <form

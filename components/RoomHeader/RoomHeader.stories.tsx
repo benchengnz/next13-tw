@@ -12,5 +12,15 @@ export const ShowHeader: Story = {
     currentUrl: "http://localhost:3000/rooms/-Nhk-cn2V49nbtVlCNJz",
     userName: "Joe Frank",
     roomName: "Fancy room",
+    avatar: "",
+  },
+};
+
+export const ShowHeaderWithAvatar: Story = {
+  args: {
+    currentUrl: "http://localhost:3000/rooms/-Nhk-cn2V49nbtVlCNJz",
+    userName: "Joe Frank",
+    roomName: "Fancy room",
+    avatar: "/images/avatars/dog-avatar-1.png",
   },
 };

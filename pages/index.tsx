@@ -2,12 +2,15 @@ import { Inter } from "next/font/google";
 import useEnsureUsername from "@/hooks/useEnsureUsername";
 import useCreateRoom from "@/hooks/useCreateRoom";
 import Spinner from "@/components/Spinner/Spinner";
+import { scanAvatars } from "@/lib/scanAvatars";
+import { GetStaticProps } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
-  const usernamePrompt = useEnsureUsername();
+export default function Home({ imagePaths }: { imagePaths: string[] | null }) {
+  const usernamePrompt = useEnsureUsername({ imagePaths });
   const { creationStatus } = useCreateRoom();
+  console.log(imagePaths);
   if (usernamePrompt) return usernamePrompt;
   return (
     <main
@@ -26,3 +29,8 @@ export default function Home() {
     </main>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  const imagePaths = scanAvatars("dealerAvatars");
+  return { props: { imagePaths } };
+};

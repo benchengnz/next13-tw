@@ -5,15 +5,17 @@ import Spinner from "@/components/Spinner/Spinner";
 import Toast from "@/components/Toast/Toast";
 import { useUsername } from "@/contexts/UsernameContext";
 import useEnsureUsername from "@/hooks/useEnsureUsername";
+import { scanAvatars } from "@/lib/scanAvatars";
+import { GetStaticProps } from "next";
 
 type RoomPageState = "loading" | "loaded";
 
-const Rooms: FC = () => {
+const Rooms = ({ imagePaths }: { imagePaths: string[] | null }) => {
   const router = useRouter();
   const { roomid } = router.query;
   const roomIdValue = Array.isArray(roomid) ? roomid[0] : roomid;
   const { username } = useUsername();
-  const usernamePrompt = useEnsureUsername();
+  const usernamePrompt = useEnsureUsername({ imagePaths });
   const [state, setState] = useState<RoomPageState>("loading");
   const [toastMessage, setToastMessage] = useState("");
 
@@ -107,3 +109,13 @@ const addParticipant = async (roomId: string, userName: string) => {
   }
 };
 export default Rooms;
+
+export const getStaticProps: GetStaticProps = async () => {
+  const imagePaths = scanAvatars("avatars");
+  return { props: { imagePaths } };
+};
+
+export const getStaticPaths = async () => {
+  // Return an empty paths array and enable fallback
+  return { paths: [], fallback: "blocking" };
+};

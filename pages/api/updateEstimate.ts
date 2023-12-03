@@ -24,6 +24,8 @@ export default async function handler(
       await participantRef.update({ estimate: estimateValue });
     } else {
       // Participant does not exist, add them
+      console.log("Exisiting room add particpant...");
+
       await participantRef.set({
         name: userName,
         estimate: estimateValue || "",

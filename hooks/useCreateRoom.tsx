@@ -5,7 +5,7 @@ import router from "next/router";
 export type CreationStatus = "idle" | "creating" | "done" | "error";
 
 const useCreateRoom = () => {
-  const { username } = useUsername();
+  const { username, avatar } = useUsername();
   const [creationStatus, setCreationStatus] = useState<CreationStatus>("idle");
   const creationStarted = useRef(false);
 
@@ -27,6 +27,7 @@ const useCreateRoom = () => {
           body: JSON.stringify({
             roomName: `${username}'s room`,
             owner: username,
+            avatar: avatar,
           }),
         });
 

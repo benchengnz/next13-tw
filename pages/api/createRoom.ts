@@ -7,12 +7,13 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "POST") {
-    const { roomName, owner } = req.body;
+    const { roomName, owner, avatar } = req.body;
     const admin = firebaseAdmin();
     try {
       const db = admin.database();
       const newRoomRef = db.ref("rooms").push();
       // Create the room and initialize the participants in one operation
+      console.log("create room add particpant...");
       await newRoomRef.set({
         name: roomName,
         isVisible: false,
@@ -21,6 +22,7 @@ export default async function handler(
           [owner.toLowerCase()]: {
             name: owner,
             estimate: "",
+            avatar: avatar,
           },
         },
       });

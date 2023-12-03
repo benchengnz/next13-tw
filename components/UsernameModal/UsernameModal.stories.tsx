@@ -1,12 +1,32 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import React from "react";
+import { Meta, StoryObj } from "@storybook/react";
 import UsernameModal from "./UsernameModal";
+import { UsernameProvider } from "@/contexts/UsernameContext";
 
-const meta = {
-  title: "Components/User name modal form",
+const meta: Meta<typeof UsernameModal> = {
+  title: "Components/Username Modal Form",
   component: UsernameModal,
-} satisfies Meta<typeof UsernameModal>;
+  // Decorators can be applied to the meta object to affect all stories
+  decorators: [
+    (Story) => (
+      <UsernameProvider>
+        <Story />
+      </UsernameProvider>
+    ),
+  ],
+};
 
 export default meta;
+
 type Story = StoryObj<typeof meta>;
 
-export const ShowForm: Story = {};
+export const ShowForm: Story = {
+  // You can also apply decorators to individual stories if needed
+  // decorators: [
+  //   (Story) => (
+  //     <UsernameProvider>
+  //       <Story />
+  //     </UsernameProvider>
+  //   )
+  // ],
+};

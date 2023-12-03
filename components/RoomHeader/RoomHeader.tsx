@@ -1,18 +1,20 @@
-// components/RoomHeader.tsx
 import React, { useState } from "react";
 import { copyToClipboard } from "@/lib/clipboard";
 import Image from "next/image";
+import Toast from "../Toast/Toast";
 
 type RoomHeaderProps = {
   roomName: string;
   userName: string;
   currentUrl: string;
+  avatar?: string | null;
 };
 
 const RoomHeader: React.FC<RoomHeaderProps> = ({
   roomName,
   userName,
   currentUrl,
+  avatar = "",
 }) => {
   const [isCopied, setIsCopied] = useState(false);
   const handleCopyClick = () => {
@@ -43,16 +45,23 @@ const RoomHeader: React.FC<RoomHeaderProps> = ({
           />
         </button>
         {isCopied && (
-          <div
-            className={`absolute left-72 ml-2 bg-white shadow-md p-4 rounded-md z-10 ${
-              isCopied ? "popup-enter-active" : "popup-exit-active"
-            }`}
-          >
-            URL copied to clipboard!
-          </div>
+          <Toast message="URL copied to clipboard!" duration={2000} />
         )}
       </div>
       <span className="text-1xl text-gray-500">Welcome, {userName}</span>
+      {avatar ? (
+        <Image
+          alt="avatar"
+          src={avatar}
+          width={32}
+          height={32}
+          className="rounded-full"
+        />
+      ) : (
+        <div className="flex items-center justify-center w-8 h-8 bg-gray-300 rounded-full text-white">
+          {userName.charAt(0).toUpperCase()}
+        </div>
+      )}
     </div>
   );
 };

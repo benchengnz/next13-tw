@@ -4,14 +4,14 @@ import React, { useEffect } from "react";
 type ToastProps = {
   message: string;
   duration?: number;
-  onClose: () => void;
+  onClose?: () => void | null;
 };
 
 const Toast: React.FC<ToastProps> = ({ message, duration = 3000, onClose }) => {
   console.log("toast begin");
   useEffect(() => {
     const timer = setTimeout(() => {
-      onClose();
+      if (onClose) onClose();
     }, duration);
 
     return () => clearTimeout(timer);

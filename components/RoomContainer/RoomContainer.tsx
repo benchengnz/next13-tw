@@ -10,9 +10,14 @@ import Spinner from "../Spinner/Spinner";
 type RoomContainerProps = {
   roomId: string; // The ID of the room, could be from the URL or user input
   userName: string; // The name of the user in the room
+  avatar?: string | null;
 };
 
-const RoomContainer: React.FC<RoomContainerProps> = ({ roomId, userName }) => {
+const RoomContainer: React.FC<RoomContainerProps> = ({
+  roomId,
+  userName,
+  avatar,
+}) => {
   const [roomData, error] = useGetRoomData(roomId);
   const participantsArray = roomData
     ? Object.values(roomData.participants || {})
@@ -83,6 +88,7 @@ const RoomContainer: React.FC<RoomContainerProps> = ({ roomId, userName }) => {
         roomName={roomData?.name}
         userName={userName}
         currentUrl={currentUrl}
+        avatar={avatar}
       />
       <CardDisplay onSelect={handleCardSelect} />
       <ResultList

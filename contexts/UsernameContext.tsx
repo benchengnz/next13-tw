@@ -4,7 +4,9 @@ import { createContext, useContext, ReactNode, useState } from "react";
 
 interface UsernameContextType {
   username: string | null;
+  avatar: string | null; // Add avatar field
   setUsername: (username: string | null) => void;
+  setAvatar: (avatar: string | null) => void; // Add setAvatar method
 }
 
 const UsernameContext = createContext<UsernameContextType | undefined>(
@@ -15,9 +17,12 @@ export const UsernameProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [username, setUsername] = useState<string | null>(null);
+  const [avatar, setAvatar] = useState<string | null>(null);
 
   return (
-    <UsernameContext.Provider value={{ username, setUsername }}>
+    <UsernameContext.Provider
+      value={{ username, setUsername, avatar, setAvatar }}
+    >
       {children}
     </UsernameContext.Provider>
   );

@@ -2,17 +2,47 @@
 
 import { useUsername } from "@/contexts/UsernameContext";
 import { useState } from "react";
+import CarouselSelector from "../CarouselSelector/CarouselSelector";
 
-const UsernameModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
-  const { setUsername } = useUsername();
+type UsernameModalProps = {
+  onClose: () => void;
+  imagePaths?: string[] | null; // Optional prop for image paths
+};
+
+const UsernameModal: React.FC<UsernameModalProps> = ({
+  onClose,
+  imagePaths,
+}) => {
+  const { setUsername, setAvatar } = useUsername();
   const [tempName, setTempName] = useState("");
+  const [imageIndex, setImageIndex] = useState(0);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log("handleSubmit..");
     setUsername(tempName);
+    if (imagePaths) {
+      setAvatar(imagePaths[imageIndex]);
+      console.log(imagePaths[imageIndex]);
+    }
+
     onClose();
   };
 
+  if (!imagePaths)
+    imagePaths = [
+      "/images/avatars/dog-avatar-1.png",
+      "/images/avatars/dog-avatar-4.png",
+      "/images/avatars/dog-avatar-6.png",
+      "/images/avatars/dog-avatar-15.png",
+    ];
+
+  const onImageChangeHandler = (currentIndex: number) => {
+    console.log(currentIndex);
+    if (imagePaths) {
+      setImageIndex(currentIndex);
+    }
+  };
   return (
     <div className="modal flex items-center justify-center ">
       <form
@@ -20,12 +50,16 @@ const UsernameModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         rounded-lg p-6 w-80 bg-gray-100 space-y-2"
         onSubmit={handleSubmit}
       >
+        <CarouselSelector
+          imagePaths={imagePaths}
+          //onImageChange={onImageChangeHandler}
+        />
         <label>
           Enter your display name:
           <input
             className="mt-2 w-full p-2 border border-gray-300 rounded-md"
             value={tempName}
-            required
+            //required
             onChange={(e) => setTempName(e.target.value)}
           />
         </label>

@@ -11,12 +11,12 @@ const Avatar: React.FC<AvatarProps> = ({ avatar, userName }) => {
     <Image
       alt="avatar"
       src={avatar}
-      width={32}
-      height={32}
+      width={48}
+      height={48}
       className="rounded-full"
     />
   ) : (
-    <div className="flex items-center justify-center w-8 h-8 bg-gray-300 rounded-full text-white">
+    <div className="flex items-center justify-center w-12 h-12 bg-gray-300 rounded-full text-white">
       {userName.charAt(0).toUpperCase()}
     </div>
   );

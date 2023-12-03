@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { copyToClipboard } from "@/lib/clipboard";
 import Image from "next/image";
 import Toast from "../Toast/Toast";
+import Avatar from "../Avatar/Avatar";
 
 type RoomHeaderProps = {
   roomName: string;
@@ -49,19 +50,7 @@ const RoomHeader: React.FC<RoomHeaderProps> = ({
         )}
       </div>
       <span className="text-1xl text-gray-500">Welcome, {userName}</span>
-      {avatar ? (
-        <Image
-          alt="avatar"
-          src={avatar}
-          width={32}
-          height={32}
-          className="rounded-full"
-        />
-      ) : (
-        <div className="flex items-center justify-center w-8 h-8 bg-gray-300 rounded-full text-white">
-          {userName.charAt(0).toUpperCase()}
-        </div>
-      )}
+      <Avatar avatar={avatar} userName={userName} />
     </div>
   );
 };

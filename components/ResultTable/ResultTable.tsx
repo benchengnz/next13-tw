@@ -1,6 +1,7 @@
 // ResultTable.tsx
 import React from "react";
 import PokerCard from "../PokerCard/PokerCard";
+import Avatar from "../Avatar/Avatar";
 
 type Props = {
   isvisible: boolean;
@@ -23,9 +24,12 @@ const ResultTable: React.FC<Props> = ({ estimates, isvisible }) => {
         {estimates.map((estimate, index) => (
           <tr
             key={index}
-            className="hover:bg-gray-100 border bg-slate-100/70 border-gray-300"
+            className="hover:bg-gray-100 border bg-slate-100/70 border-gray-300 "
           >
-            <td className="py-1 px-4">{estimate.name}</td>
+            <td className="flex items-center py-1 px-4 space-x-2 min-h-[80px] ">
+              <Avatar userName={estimate.name} />
+              &nbsp; {estimate.name}
+            </td>
             <td>
               <PokerCard
                 size="small"

@@ -73,6 +73,7 @@ const Rooms = ({ imagePaths }: { imagePaths: string[] | null }) => {
           <RoomContainer
             roomId={roomIdValue as string}
             userName={username as string}
+            avatar={avatar}
           />
         </div>
       )}

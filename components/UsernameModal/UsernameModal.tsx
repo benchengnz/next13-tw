@@ -52,7 +52,7 @@ const UsernameModal: React.FC<UsernameModalProps> = ({
       >
         <CarouselSelector
           imagePaths={imagePaths}
-          //onImageChange={onImageChangeHandler}
+          onImageChange={onImageChangeHandler}
         />
         <label>
           Enter your display name:

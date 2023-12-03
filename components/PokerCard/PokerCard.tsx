@@ -22,11 +22,12 @@ const PokerCard: React.FC<PokerCardProps> = ({
   };
 
   const commonStyles =
-    "border-2 rounded-md p-4 m-2 flex justify-center items-center cursor-pointer";
+    "border-2 rounded-md p-4 m-2 flex justify-center items-center cursor-pointer transition duration-300 ease-in-out";
   const styles = {
     base: commonStyles,
-    selected: "border-blue-600 bg-blue-100",
-    unselected: "border-gray-300 bg-white",
+    selected: "border-blue-600 bg-blue-100 bg-opacity-50 ",
+    unselected:
+      "border-gray-300 bg-white bg-opacity-80 hover:scale-105 hover:rotate-3 hover:shadow-lg",
     invisible: "card-back",
   };
 

@@ -10,7 +10,7 @@ export default async function handler(
     return res.status(405).end("Method Not Allowed");
   }
 
-  const { roomId, userName, estimateValue } = req.body;
+  const { roomId, userName, estimateValue, avatar } = req.body;
 
   try {
     const db = firebaseAdmin().database();
@@ -27,6 +27,7 @@ export default async function handler(
       await participantRef.set({
         name: userName,
         estimate: estimateValue || "",
+        avatar: avatar,
       });
     }
 

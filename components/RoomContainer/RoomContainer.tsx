@@ -105,12 +105,14 @@ type UpdateEstimateProps = {
   roomId: string;
   userName: string;
   cardValue: string;
+  avatar?: string | null;
 };
 
 const updateEstimate = async ({
   roomId,
   userName,
   cardValue,
+  avatar,
 }: UpdateEstimateProps) => {
   const response = await fetch("/api/updateEstimate", {
     method: "POST",
@@ -121,6 +123,7 @@ const updateEstimate = async ({
       roomId: roomId,
       userName: userName,
       estimateValue: cardValue,
+      avatar: avatar,
     }),
   });
 

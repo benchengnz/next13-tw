@@ -38,7 +38,7 @@ const Rooms = ({ imagePaths }: { imagePaths: string[] | null }) => {
         } else {
           setState("loaded");
           if (username) {
-            addParticipant(roomIdValue, username);
+            addParticipant(roomIdValue, username, avatar);
           }
         }
       } catch (err) {
@@ -50,7 +50,7 @@ const Rooms = ({ imagePaths }: { imagePaths: string[] | null }) => {
     };
 
     checkRoomExists();
-  }, [router, roomIdValue, username]);
+  }, [router, roomIdValue, avatar, username]);
 
   if (state === "loading" && !toastMessage) {
     return <Spinner caption="Loading" />;
@@ -79,7 +79,11 @@ const Rooms = ({ imagePaths }: { imagePaths: string[] | null }) => {
   );
 };
 
-const addParticipant = async (roomId: string, userName: string) => {
+const addParticipant = async (
+  roomId: string,
+  userName: string,
+  avatar?: string | null
+) => {
   try {
     const response = await fetch("/api/updateEstimate", {
       method: "POST",
@@ -90,6 +94,7 @@ const addParticipant = async (roomId: string, userName: string) => {
         roomId: roomId,
         userName: userName,
         estimateValue: "",
+        avatar: avatar,
       }),
     });
 

@@ -21,8 +21,8 @@ const CarouselSelector: React.FC<CarouselSelectorProps> = ({
             <Image
               src={path}
               alt={`Avatar ${index}`}
-              width={500}
-              height={500}
+              width={275}
+              height={275}
             />
           </div>
         ))}

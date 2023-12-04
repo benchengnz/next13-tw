@@ -47,7 +47,7 @@ const useCreateRoom = () => {
     };
 
     createRoom();
-  }, [creationStatus, username]); // Only username is a dependency
+  }, [creationStatus, avatar, username]); // Only username is a dependency
 
   return { creationStatus };
 };

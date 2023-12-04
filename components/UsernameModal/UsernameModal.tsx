@@ -1,7 +1,7 @@
 // components/UsernameModal.tsx
 
 import { useUsername } from "@/contexts/UsernameContext";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import CarouselSelector from "../CarouselSelector/CarouselSelector";
 
 type UsernameModalProps = {
@@ -15,13 +15,14 @@ const UsernameModal: React.FC<UsernameModalProps> = ({
 }) => {
   const { setUsername, setAvatar } = useUsername();
   const [tempName, setTempName] = useState("");
-  const [imageIndex, setImageIndex] = useState(0);
+  //const [imageIndex, setImageIndex] = useState(0);
+  const imageIndexRef = useRef(0);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setUsername(tempName);
     if (imagePaths) {
-      setAvatar(imagePaths[imageIndex]);
+      setAvatar(imagePaths[imageIndexRef.current]);
     }
 
     onClose();
@@ -37,11 +38,11 @@ const UsernameModal: React.FC<UsernameModalProps> = ({
 
   const onImageChangeHandler = (currentIndex: number) => {
     if (imagePaths) {
-      setImageIndex(currentIndex);
+      imageIndexRef.current = currentIndex;
     }
   };
   return (
-    <div className="modal flex items-center justify-center ">
+    <div className="modal flex items-center">
       <form
         className="border border-gray-300 shadow-md mt-4
         rounded-lg p-6 w-80 bg-gray-100 space-y-2"

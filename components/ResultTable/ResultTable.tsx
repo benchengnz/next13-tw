@@ -25,9 +25,10 @@ const ResultTable: React.FC<Props> = ({ estimates, isvisible }) => {
         {estimates.map((estimate, index) => (
           <tr
             key={index}
-            className="hover:bg-gray-100 border bg-slate-100/70 border-gray-300 "
+            className="hover:bg-gray-100 border bg-slate-100/70 border-gray-300 
+             dark:bg-gray-700 dark:border-gray-600 dark:hover:bg-gray-600"
           >
-            <td className="flex items-center py-1 px-4 space-x-2 min-h-[80px] ">
+            <td className="flex items-center py-1 px-4 space-x-2 min-h-[74px] ">
               <Avatar avatar={estimate.avatar} userName={estimate.name} />
               &nbsp; {estimate.name}
             </td>

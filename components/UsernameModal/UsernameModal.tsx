@@ -44,8 +44,8 @@ const UsernameModal: React.FC<UsernameModalProps> = ({
   return (
     <div className="modal flex items-center">
       <form
-        className="border border-gray-300 shadow-md mt-4
-        rounded-lg p-6 w-80 bg-gray-100 space-y-2"
+        className="border border-gray-300 shadow-md mt-4 rounded-lg p-6 w-80
+                  bg-gray-100 space-y-2 dark:bg-gray-800 dark:border-gray-600"
         onSubmit={handleSubmit}
       >
         <CarouselSelector
@@ -55,7 +55,8 @@ const UsernameModal: React.FC<UsernameModalProps> = ({
         <label>
           Enter your display name:
           <input
-            className="mt-2 w-full p-2 border border-gray-300 rounded-md"
+            className="mt-2 w-full p-2 border border-gray-300 rounded-md
+                       dark:border-gray-600 dark:bg-gray-700 dark:text-white"
             value={tempName}
             //required
             onChange={(e) => setTempName(e.target.value)}

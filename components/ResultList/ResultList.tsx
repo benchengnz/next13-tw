@@ -25,7 +25,7 @@ const ResultList: React.FC<ResultListProps> = ({
 }) => {
   return (
     <div>
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-center mt-2">
         <ClearEstimateButton onClick={onClearEstimates} />
         <ToggleVisibilityButton
           onClick={onToggleVisibility}

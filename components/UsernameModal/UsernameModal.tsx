@@ -58,7 +58,7 @@ const UsernameModal: React.FC<UsernameModalProps> = ({
             className="mt-2 w-full p-2 border border-gray-300 rounded-md
                        dark:border-gray-600 dark:bg-gray-700 dark:text-white"
             value={tempName}
-            //required
+            maxLength={30}
             onChange={(e) => setTempName(e.target.value)}
           />
         </label>

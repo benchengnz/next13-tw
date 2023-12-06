@@ -7,6 +7,7 @@ type AvatarProps = {
 };
 
 const Avatar: React.FC<AvatarProps> = ({ avatar, userName }) => {
+  if (!userName) userName = "Unknown";
   return avatar ? (
     <Image
       alt="avatar"
